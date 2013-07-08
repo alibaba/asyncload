@@ -10,7 +10,7 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 public class AsyncLoadProxyRepository {
 
-    private static Map<String, Class> reponsitory = new ConcurrentHashMap<String, Class>(); // 在方法调用级别进行sync控制,这里不需要使用cocurrent包
+    private static Map<String, Class> reponsitory = new ConcurrentHashMap<String, Class>();
 
     /**
      * 如果存在对应的key的ProxyClass就返回，没有则返回null
@@ -30,7 +30,11 @@ public class AsyncLoadProxyRepository {
      */
     public static void registerProxy(String key, Class proxyClass) {
         if (!reponsitory.containsKey(key)) { // 避免重复提交
-            reponsitory.put(key, proxyClass);
+            synchronized (reponsitory){
+                if (!reponsitory.containsKey(key)){
+                    reponsitory.put(key, proxyClass);
+                }
+            }
         }
     }
 }

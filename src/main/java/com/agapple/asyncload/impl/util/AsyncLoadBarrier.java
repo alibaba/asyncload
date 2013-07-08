@@ -1,10 +1,10 @@
 package com.agapple.asyncload.impl.util;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.agapple.asyncload.impl.AsyncLoadObject;
 import com.agapple.asyncload.impl.exceptions.AsyncLoadException;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 提供一栅栏机制,利用该栅栏可以要求Thread主线程提交的异步所有并行加载单元返回结果 <br>
@@ -21,7 +21,7 @@ import com.agapple.asyncload.impl.exceptions.AsyncLoadException;
  * try {
  * ModelA a = xxService.getModelA(); //提交一个加载单元
  * ModelB b = xxService.getModelB(); //提交一个加载单元
- * } finally { //务必要执行,不能会内有内存泄漏,barrier中会持有临时的加载单元
+ * } finally { //务必要执行,不然会内有内存泄漏,barrier中会持有临时的加载单元
  *  try {
  *      AsyncLoadBarrier.await();
  *  } catch (InterruptedException ex) {

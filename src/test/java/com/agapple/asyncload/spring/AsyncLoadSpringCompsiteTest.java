@@ -28,21 +28,21 @@ public class AsyncLoadSpringCompsiteTest extends BaseAsyncLoadNoRunTest {
     public void testPrototype() {
         internalTest(asyncLoadTestServiceForCompsitePrototype);
         AsyncLoadTestService service = (AsyncLoadTestService) this.applicationContext.getBean("asyncLoadTestServiceForCompsitePrototype");
-        assertNotSame(service, asyncLoadTestServiceForCompsitePrototype);
+        Assert.assertNotSame(service, asyncLoadTestServiceForCompsitePrototype);
     }
 
     @Test
     public void testSingleton() {
         internalTest(asyncLoadTestServiceForCompsiteSingleton);
         AsyncLoadTestService service = (AsyncLoadTestService) this.applicationContext.getBean("asyncLoadTestServiceForCompsiteSingleton");
-        assertSame(service, asyncLoadTestServiceForCompsiteSingleton);
+        Assert.assertSame(service, asyncLoadTestServiceForCompsiteSingleton);
     }
 
     @Test
     public void testProxyFactoryBean() {
         internalTest(asyncLoadTestServiceForCompsiteFactoryBean);
         AsyncLoadTestService service = (AsyncLoadTestService) this.applicationContext.getBean("asyncLoadTestServiceForCompsiteFactoryBean");
-        assertNotSame(service, asyncLoadTestServiceForCompsiteFactoryBean);
+        Assert.assertNotSame(service, asyncLoadTestServiceForCompsiteFactoryBean);
     }
 
     private void internalTest(AsyncLoadTestService service) {
