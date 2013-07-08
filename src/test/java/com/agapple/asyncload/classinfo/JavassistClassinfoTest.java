@@ -1,20 +1,21 @@
 package com.agapple.asyncload.classinfo;
 
-import java.lang.reflect.Method;
-
+import com.agapple.asyncload.BaseAsyncLoadNoRunTest;
+import com.agapple.asyncload.impl.helper.AsyncLoadReflectionHelper;
 import javassist.util.proxy.MethodHandler;
 import javassist.util.proxy.ProxyFactory;
 import javassist.util.proxy.ProxyObject;
 import net.sf.cglib.reflect.FastMethod;
+import org.junit.Test;
 
-import com.agapple.asyncload.BaseAsyncLoadNoRunTest;
-import com.agapple.asyncload.impl.helper.AsyncLoadReflectionHelper;
+import java.lang.reflect.Method;
 
 /**
  * @author jianghang 2011-4-2 下午01:54:16
  */
 public class JavassistClassinfoTest extends BaseAsyncLoadNoRunTest {
 
+    @Test
     public void test() throws Exception {
         ProxyFactory proxyFactory = new ProxyFactory();
         proxyFactory.setSuperclass(ClassInfoService.class);
