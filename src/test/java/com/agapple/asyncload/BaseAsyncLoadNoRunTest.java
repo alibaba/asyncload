@@ -1,14 +1,13 @@
 package com.agapple.asyncload;
 
-import java.util.concurrent.ConcurrentHashMap;
-
+import com.agapple.asyncload.impl.helper.AsyncLoadProxyRepository;
 import junit.framework.Assert;
-
+import org.junit.Test;
 import org.junit.Before;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit38.AbstractJUnit38SpringContextTests;
 
-import com.agapple.asyncload.impl.helper.AsyncLoadProxyRepository;
+import java.util.concurrent.ConcurrentHashMap;
 
 @ContextConfiguration(locations = { "classpath:asyncload/applicationContext.xml" })
 public class BaseAsyncLoadNoRunTest extends AbstractJUnit38SpringContextTests {
@@ -22,6 +21,11 @@ public class BaseAsyncLoadNoRunTest extends AbstractJUnit38SpringContextTests {
         } catch (Exception e) {
             Assert.fail();
         }
+    }
+
+    @Test
+    public void testEmpty(){
+        Assert.assertTrue(true);
     }
 
 }
