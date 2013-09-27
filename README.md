@@ -33,7 +33,7 @@
 <p>正因为考虑到I/O阻塞，长的外部环境单个请求处理基本都是在几十ms，最终的出路只能异步+并行，从而诞生了该开源产品</P>
 
 <h1>项目介绍</h1>
-<p style="margin-top: 15px; margin-bottom: 15px; color: #333333; font-family: Helvetica, arial, freesans, clean, sans-serif; font-size: 15px; line-height: 25px;">名称：asyncload /p>
+<p style="margin-top: 15px; margin-bottom: 15px; color: #333333; font-family: Helvetica, arial, freesans, clean, sans-serif; font-size: 15px; line-height: 25px;">名称：asyncload </p>
 <p style="margin-top: 15px; margin-bottom: 15px; color: #333333; font-family: Helvetica, arial, freesans, clean, sans-serif; font-size: 15px; line-height: 25px;">译意： async cocurrent load</p>
 <p style="margin-top: 15px; margin-bottom: 15px; color: #333333; font-family: Helvetica, arial, freesans, clean, sans-serif; font-size: 15px; line-height: 25px;">语言： 纯java开发</p>
 <p style="margin-top: 15px; margin-bottom: 15px; color: #333333; font-family: Helvetica, arial, freesans, clean, sans-serif; font-size: 15px; line-height: 25px;">定位： 业务层异步并行加载工具包，减少页面响应时间</p>
@@ -48,18 +48,19 @@
 
 <p>很明显，经过异步并行加载后，一次request请求总的响应时间就等于最长的依赖关系请求链的相应时间。 </p>
 
-<h1>Introduction</h1>
-<p>See the page for Introduction: [[Introduction]].</p>
-<h1>QuickStart</h1>
-<p>See the page for quick start: [[QuickStart]].</p>
-<h1>用户手册</h1>
-<p>See the page for 手册: [[用户手册]].</p>
-<h1>ChangeLog</h1>
-<p>See the page for ChangeLog: [[ChangeLog]].</p>
+<h1>相关文档</h1>
 
-<h1>版本相关:</h1>
-<p>1. 建议版本：xxx </p>
-<p>2. maven依赖 ： 暂无 </p>
+See the wiki page for : <a href="https://github.com/alibaba/canal/wiki" >wiki文档</href>
+
+<br/><a name="table-of-contents" class="anchor" href="#table-of-contents">
+<span class="mini-icon mini-icon-link"></span></a>wiki文档列表</h3>
+<ul>
+<li><a class="internal present" href="https://github.com/alibaba/asyncload/wiki/Home">Home</a></li>
+<li><a class="internal present" href="https://github.com/alibaba/asyncload/wiki/Introduction">Introduction</a></li>
+<li><a class="internal present" href="https://github.com/alibaba/asyncload/wiki/QuickStart">QuickStart</a></li>
+<li><a class="internal present" href="https://github.com/alibaba/asyncload/wiki/ChangeLog">ChangeLog</a></li>
+<li><a class="internal present" href="https://github.com/alibaba/asyncload/wiki/用户手册">用户手册</a></li>
+</ul>
 
 <p> </p>
 <h1>问题反馈</h1>
