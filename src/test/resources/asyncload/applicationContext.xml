@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="GB2312"?>
 <!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans-2.0.dtd">
 <beans default-autowire="byName">
-	<bean id="asyncLoadTestServiceDAO" class="com.agapple.asyncload.domain.AsyncLoadTestServiceDAO" />
-	<bean id="asyncLoadTestService" class="com.agapple.asyncload.domain.AsyncLoadTestServiceImpl" />
+	<bean id="asyncLoadTestServiceDAO" class="com.alibaba.asyncload.domain.AsyncLoadTestServiceDAO" />
+	<bean id="asyncLoadTestService" class="com.alibaba.asyncload.domain.AsyncLoadTestServiceImpl" />
 	<!-- async相关配置 -->
-	<bean id="asyncLoadExecutor" class="com.agapple.asyncload.AsyncLoadExecutor" init-method="initital" destroy-method="destory">
+	<bean id="asyncLoadExecutor" class="com.alibaba.asyncload.AsyncLoadExecutor" init-method="initital" destroy-method="destory">
 		<property name="poolSize" value="10" />
 		<property name="acceptCount" value="100" />
 		<property name="mode" value="REJECT" />
 	</bean>
-	<bean id="asyncLoadMethodMatch" class="com.agapple.asyncload.impl.AsyncLoadPerl5RegexpMethodMatcher" >
+	<bean id="asyncLoadMethodMatch" class="com.alibaba.asyncload.impl.AsyncLoadPerl5RegexpMethodMatcher" >
 		<property name="patterns">
 			<list>
 				<value>(.*)RemoteModel(.*)</value>
@@ -22,7 +22,7 @@
 		</property>
 		<property name="excludeOveride" value="false" />
 	</bean>
-	<bean id="asyncLoadConfig" class="com.agapple.asyncload.AsyncLoadConfig">
+	<bean id="asyncLoadConfig" class="com.alibaba.asyncload.AsyncLoadConfig">
 		<property name="defaultTimeout" value="3000" />
 		<property name="needThreadLocalSupport" value="true" />
 		<property name="needBarrierSupport" value="false" />
@@ -33,8 +33,8 @@
 		</property>
 	</bean>
 	<!-- 异步加载模FactoryBean -->
-	<bean id="asyncLoadTestFactoryBean" class="com.agapple.asyncload.impl.spring.AsyncLoadFactoryBean">
-		<property name="targetClass" value="com.agapple.asyncload.domain.AsyncLoadTestService" /><!-- 指定具体的代理目标class -->
+	<bean id="asyncLoadTestFactoryBean" class="com.alibaba.asyncload.impl.spring.AsyncLoadFactoryBean">
+		<property name="targetClass" value="com.alibaba.asyncload.domain.AsyncLoadTestService" /><!-- 指定具体的代理目标class -->
 		<property name="target">
 			<ref bean="asyncLoadTestService" />
 		</property>
@@ -42,13 +42,13 @@
 		<property name="config" ref="asyncLoadConfig" />
 	</bean>
 	<!-- 异步加载模板类 -->
-	<bean id="asyncLoadTemplate" class="com.agapple.asyncload.impl.template.AsyncLoadTemplate" >
+	<bean id="asyncLoadTemplate" class="com.alibaba.asyncload.impl.template.AsyncLoadTemplate" >
 		<property name="executor" ref="asyncLoadExecutor" />
 		<property name="config" ref="asyncLoadConfig" />
 	</bean>
 	<!--  并行加载拦截器 -->
-	<bean id="asyncLoadTestServiceForInteceptor" class="com.agapple.asyncload.domain.AsyncLoadTestServiceImpl" />
-	<bean id="asyncLoadInterceptor" class="com.agapple.asyncload.impl.spring.AsyncLoadInterceptor" >
+	<bean id="asyncLoadTestServiceForInteceptor" class="com.alibaba.asyncload.domain.AsyncLoadTestServiceImpl" />
+	<bean id="asyncLoadInterceptor" class="com.alibaba.asyncload.impl.spring.AsyncLoadInterceptor" >
 		<property name="asyncLoadTemplate" ref="asyncLoadTemplate" />
 	</bean>
 	<bean class="org.springframework.aop.framework.autoproxy.BeanNameAutoProxyCreator">
@@ -68,11 +68,11 @@
      
      <!--  模式测试 -->
      <!-- 多例测试 -->
-     <bean id="asyncLoadTestServiceForCompsitePrototype" class="com.agapple.asyncload.domain.AsyncLoadTestServiceImpl" scope="prototype" />
+     <bean id="asyncLoadTestServiceForCompsitePrototype" class="com.alibaba.asyncload.domain.AsyncLoadTestServiceImpl" scope="prototype" />
      <!-- 单例测试 -->
-     <bean id="asyncLoadTestServiceForCompsiteSingleton" class="com.agapple.asyncload.domain.AsyncLoadTestServiceImpl" scope="singleton" />
+     <bean id="asyncLoadTestServiceForCompsiteSingleton" class="com.alibaba.asyncload.domain.AsyncLoadTestServiceImpl" scope="singleton" />
      <!-- 原本是ProxyFactoryBean -->
-     <bean id="logInteceptor" class="com.agapple.asyncload.spring.LogInteceptor" />
+     <bean id="logInteceptor" class="com.alibaba.asyncload.spring.LogInteceptor" />
      <bean id="asyncLoadTestServiceForCompsiteFactoryBean" class="org.springframework.aop.framework.ProxyFactoryBean" scope="prototype">
     	<property name="interceptorNames">
     		<list>
@@ -83,7 +83,7 @@
     	<property name="proxyTargetClass" value="true" /> <!-- 强制申明为cglib代理 -->
      </bean>
      
-     <bean class="com.agapple.asyncload.impl.spring.CompositeAutoProxyCreator">
+     <bean class="com.alibaba.asyncload.impl.spring.CompositeAutoProxyCreator">
         <property name="beanNames">
         	<list>
         		<value>asyncLoadTestServiceForCompsitePrototype</value>
@@ -98,7 +98,7 @@
         </property>
      </bean>
      <!-- 多次的代理会只作用于一个代理对象 -->
-     <bean class="com.agapple.asyncload.impl.spring.CompositeAutoProxyCreator">
+     <bean class="com.alibaba.asyncload.impl.spring.CompositeAutoProxyCreator">
      	<property name="applyCommonInterceptorsFirst" value="true"/>
         <property name="beanNames">
         	<list>
