@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="GB2312"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans-2.0.dtd">
+<beans default-autowire="byName">
+	<!-- async相关配置 -->
+	<bean id="asyncLoadExecutor" class="com.alibaba.asyncload.AsyncLoadExecutor" init-method="initital" destroy-method="destory">
+		<property name="poolSize" value="10" />
+		<property name="acceptCount" value="100" />
+		<property name="mode" value="REJECT" />
+	</bean>
+	<bean id="asyncLoadConfig" class="com.alibaba.asyncload.AsyncLoadConfig">
+		<property name="defaultTimeout" value="0" />
+		<property name="needThreadLocalSupport" value="false" />
+		<property name="needBarrierSupport" value="false" />
+	</bean>
+	<!-- 异步加载模板类 -->
+	<bean id="asyncLoadTemplate" class="com.alibaba.asyncload.impl.template.AsyncLoadTemplate" >
+		<property name="executor" ref="asyncLoadExecutor" />
+		<property name="config" ref="asyncLoadConfig" />
+	</bean>
+	<!--  并行加载拦截器 -->
+	<bean id="asyncLoadInterceptor" class="com.alibaba.asyncload.impl.spring.AsyncLoadInterceptor" >
+		<property name="asyncLoadTemplate" ref="asyncLoadTemplate" />
+	</bean>
+	
+	<bean class="org.springframework.aop.framework.autoproxy.BeanNameAutoProxyCreator">
+   		<property name="optimize" value="false"/>
+   		<property name="proxyTargetClass" value="false" />
+        <property name="beanNames">
+        	<list>
+        		<value>xxxService</value>
+        	</list>
+        </property>
+        <property name="interceptorNames">
+        	<list>
+	            <value>asyncLoadInterceptor</value>
+        	</list>
+        </property>
+     </bean>
+</beans>
