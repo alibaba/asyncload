@@ -3,7 +3,7 @@
 
 	<groupId>com.alibaba.asyncload</groupId>
 	<artifactId>asyncload</artifactId>
-	<version>1.0.0</version>
+	<version>1.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 	<name>asyncload</name>
 	<url>https://github.com/alibaba/asyncload</url>
