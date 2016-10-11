@@ -58,4 +58,3 @@ See the wiki page for : <a href="https://github.com/alibaba/canal/wiki" >wiki文
 <p>2. 邮件交流： jianghang115@gmail.com</span></p>
 <p>3. 新浪微博： agapple0002</span></p>
 <p>4. 报告issue：</span><a href="https://github.com/alibaba/asyncload/issues">issues</a></p>
-</div>
