@@ -30,7 +30,11 @@ public class AsyncLoadAnnotationMultiTest {
 		// 执行测试
 		AsyncLoadAnnotationMultiMethodTest service = annotationConfigApplicationContext
 				.getBean(AsyncLoadAnnotationMultiMethodTest.class);
-		AsyncLoadTestModel model = service.multiHandler("xxx", 10000);
+		Thread current = Thread.currentThread();
+
+		AsyncThreadLocalInheriteTest.set("yjk----test");
+		System.out.println("线程信息:" + current);
+		AsyncLoadTestModel model = service.multiHandler("xxx", 1000);
 		System.out.println(model);
 		long start = 0, end = 0;
 		start = System.currentTimeMillis();

@@ -176,6 +176,8 @@ public class AsyncLoadTemplate {
 			return callback.doAsyncLoad();
 		} else {
 			final AsyncLoadConfig copy = config;
+			System.out
+					.println("------executor addr=" + executor.hashCode() + ";content=" + executor);
 			Future<R> future = executor.submit(new AsyncLoadCallable() {
 
 				@Override

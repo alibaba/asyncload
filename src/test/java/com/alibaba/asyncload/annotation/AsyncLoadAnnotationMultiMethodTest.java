@@ -13,6 +13,8 @@ import org.springframework.stereotype.Component;
 
 import com.alibaba.asyncload.domain.AsyncLoadTestModel;
 import com.alibaba.asyncload.impl.annotation.EnableAsyncClass;
+import com.alibaba.asyncload.impl.annotation.EnableAsyncClassMethodInfo;
+import com.alibaba.asyncload.impl.annotation.EnableAsyncMethod;
 import com.google.common.collect.Lists;
 
 /**
@@ -22,12 +24,15 @@ import com.google.common.collect.Lists;
  *
  */
 @Component
-@EnableAsyncClass
+@EnableAsyncClass(
+		classMethodInfos = { @EnableAsyncClassMethodInfo(methodMatchRegex = { ".*count.*" }) })
 public class AsyncLoadAnnotationMultiMethodTest {
 
 	@Autowired
 	private AsyncLoadAnnotationTestServiceImpl asyncLoadAnnotationTestServiceImpl;
 
+	@EnableAsyncMethod(classMethodInfos = {
+			@EnableAsyncClassMethodInfo(methodMatchRegex = { "(.*)getRemoteModel(.*)" }) })
 	public AsyncLoadTestModel multiHandler(String name, long sleep) {
 
 		List<AsyncLoadTestModel> results = Lists.newArrayList();
@@ -36,6 +41,8 @@ public class AsyncLoadAnnotationMultiMethodTest {
 					sleep);
 
 			results.add(model);
+			model = asyncLoadAnnotationTestServiceImpl.getRemoteModel1(name, sleep);
+			System.out.println("--------------------" + i + "---------------");
 		}
 		// AsyncLoadTestModel model =
 		// asyncLoadAnnotationTestServiceImpl.getRemoteModel(name, sleep);

@@ -14,6 +14,7 @@ import com.alibaba.asyncload.domain.AsyncLoadTestModel;
 import com.alibaba.asyncload.domain.AsyncLoadTestServiceImpl;
 import com.alibaba.asyncload.impl.annotation.AsyncClassDef;
 import com.alibaba.asyncload.impl.annotation.AsyncMethodDef;
+import com.alibaba.asyncload.impl.annotation.AsyncThreadPoolConfig;
 
 /**
  * @author yujiakui
@@ -22,12 +23,28 @@ import com.alibaba.asyncload.impl.annotation.AsyncMethodDef;
  *
  */
 @Component
-@AsyncClassDef
+@AsyncClassDef(
+		classThreadPoolConf = @AsyncThreadPoolConfig(effect = true, poolSize = 2, queueSize = 1))
 public class AsyncLoadAnnotationTestServiceImpl extends AsyncLoadTestServiceImpl {
 
 	@Override
 	@AsyncMethodDef(timeout = 10)
 	public AsyncLoadTestModel getRemoteModel(String name, long sleep) {
+		System.out.println(
+				"-----getRemoteModel-----threadLocal----" + AsyncThreadLocalInheriteTest.get());
+		Thread current = Thread.currentThread();
+		System.out.println("线程信息:" + current);
+		return super.getRemoteModel(name, sleep);
+	}
+
+	@AsyncMethodDef(timeout = 10, inheritThreadLocal = true,
+			methodThreadPoolConf = @AsyncThreadPoolConfig(effect = true))
+	public AsyncLoadTestModel getRemoteModel1(String name, long sleep) {
+		System.out.println(
+				"-----getRemoteModel_1-----threadLocal----" + AsyncThreadLocalInheriteTest.get());
+
+		Thread current = Thread.currentThread();
+		System.out.println("线程信息:" + current);
 		return super.getRemoteModel(name, sleep);
 	}
 
