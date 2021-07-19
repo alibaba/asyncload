@@ -43,7 +43,7 @@
 
 <h1>相关文档</h1>
 
-See the wiki page for : <a href="https://github.com/alibaba/canal/wiki" >wiki文档</href>
+See the wiki page for : <a href="https://github.com/alibaba/asyncload/wiki" >wiki文档</href>
 
 <br/><a name="table-of-contents" class="anchor" href="#table-of-contents">
 <span class="mini-icon mini-icon-link"></span></a>wiki文档列表</h3>
